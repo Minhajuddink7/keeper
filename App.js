@@ -14,70 +14,9 @@ import FullPage from './components/Layouts/FullPage';
 import AppText from './components/Typography/AppText';
 import {FloatingAction} from 'react-native-floating-action';
 import {btn_txt} from './data/constants';
-
-function HomeScreen({navigation}) {
-  const actions = [
-    {
-      text: 'New Note',
-      // icon: require('./images/ic_accessibility_white.png'),
-      name: btn_txt.ADD,
-    },
-    {
-      text: 'Note List',
-      // icon: require('./images/ic_language_white.png'),
-      name: btn_txt.LIST,
-    },
-  ];
-  const [currentNote, setCurrentNote] = useState('');
-  return (
-    <FullPage>
-      {/* <TouchableOpacity onPress={() => navigation.navigate('First')}>
-        <AppText text="Home" />
-      </TouchableOpacity> */}
-      <TextInput
-        style={{
-          color: '#fff',
-          fontSize: 24,
-          fontFamily: 'Montserrat-Bold',
-          textAlign: 'center',
-          textDecorationLine: 'underline',
-          backgroundColor: '#223',
-        }}
-        placeholder="Note title"
-      />
-      <ScrollView style={{backgroundColor: '#334', padding: 5}}>
-        <TextInput
-          multiline={true}
-          style={{
-            color: '#fff',
-            fontSize: 22,
-            fontFamily: 'Montserrat-Medium',
-          }}
-          autoFocus={true}
-          value={currentNote}
-          onChangeText={text => setCurrentNote(text)}
-        />
-      </ScrollView>
-      <FloatingAction
-        actions={actions}
-        onPressItem={name => {
-          if (name === btn_txt.ADD) {
-            setCurrentNote('');
-          } else if (name === btn_txt.LIST) {
-            navigation.navigate('First');
-          }
-        }}
-      />
-    </FullPage>
-  );
-}
-function First() {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>First Screen</Text>
-    </View>
-  );
-}
+import DynamicIcon from './components/Common/DynamicIcon';
+import NoteList from './screens/NoteList';
+import HomeScreen from './screens/HomeScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -91,8 +30,9 @@ function App() {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="First"
-          component={First}
+          name="NoteList"
+          component={NoteList}
+          options={{headerShown: false}}
           // options={{headerShown: false}}
         />
       </Stack.Navigator>
